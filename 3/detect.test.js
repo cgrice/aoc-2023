@@ -6,13 +6,28 @@ describe('detect', () => {
             ['.', '.', '.', '.'],
             ['.', '@', '.', '.'],
             ['#', '.', '.', '&'],
-            ['.', '*', '.', '4'],
+            ['.', '%', '.', '4'],
         ];
 
         const positions = detect(grid)
 
         expect(positions.symbols).toEqual([
             [1, 1], [2, 0], [2, 3], [3, 1]
+        ])
+    })
+
+    it('finds all coordinates for gears', async () => {
+        const grid = [
+            ['.', '.', '*', '.'],
+            ['.', '@', '.', '.'],
+            ['#', '.', '.', '&'],
+            ['.', '%', '.', '4'],
+        ];
+
+        const positions = detect(grid)
+
+        expect(positions.gears).toEqual([
+            [0, 2]
         ])
     })
 

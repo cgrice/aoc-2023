@@ -1,9 +1,14 @@
 const detect = (grid) => {
     const symbols = []
+    const gears = []
     const numbers = {}
 
     for (var y in grid) {
         for (var x in grid[y]) {
+            if (grid[y][x] === '*') {
+                gears.push([parseInt(y), parseInt(x)])
+            }
+            
             if (grid[y][x] !== '.' && isNaN(grid[y][x])) {
                 symbols.push([parseInt(y), parseInt(x)])
             }
@@ -42,6 +47,7 @@ const detect = (grid) => {
 
     return {
         symbols,
+        gears,
         numbers,
         grid,
     }

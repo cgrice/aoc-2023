@@ -8,6 +8,8 @@ const run = async () => {
     const grid = parse(input)
     const indexed = detect(grid)
 
+    // Part One!
+
     const adjacent = indexed.symbols.map(
         symbol => neighbours(symbol[0], symbol[1])
     )
@@ -38,6 +40,37 @@ const run = async () => {
     );
 
     console.log(total)
+
+    // Part Two!
+
+    const gearsAdjecent = indexed.gears.map(
+        symbol => neighbours(symbol[0], symbol[1])
+    )
+
+    const gearMatches = gearsAdjecent.map(
+        coords => {
+            return new Set(coords.map(
+                coord => indexed.grid[coord[0]][coord[1]]
+            ).filter(i => i !== '.'))
+        }
+    )
+
+    const gearRatios = gearMatches.filter(x => x.size === 2).map(
+        match => {
+            const numbers = Array.from(match).map(
+                index => indexed.numbers[index].value
+            )
+            return numbers[0] * numbers[1]
+        }
+    )
+    
+    const gearsTotal = Array.from(gearRatios).reduce(
+        (acc, curr) => {
+        return acc + curr
+        }, 0
+    );
+
+    console.log(gearsTotal)
 }
 
 const neighbours = (y, x) => {
